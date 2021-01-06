@@ -10,3 +10,5 @@ Not all dependencies are required for every program :
 
     brew install dcmtk
 
+If you don't have have the brew package manager , it can be instlled from https://brew.sh/
+

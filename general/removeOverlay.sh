@@ -3,6 +3,8 @@
 # http://dicomlookup.com/lookup.asp?sw=Tnumber&q=(6000,3000)
 # And associate data
 # Usage : ./removeOverlay.sh /path/to/dir/with/DCM_files.dcm
+# Prerequisites : Need to have the dcmtk executables installed on your system.
+# See the README.md for details on how to install them.
 
 if  [ $# != 1 ];
 then
