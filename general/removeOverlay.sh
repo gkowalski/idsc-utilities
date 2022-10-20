@@ -12,15 +12,15 @@ then
   exit 1
 fi
 
-for f in `find $1/ -name \*.dcm -print `
+find $1 -name \*.dcm -type f  -print0  | while read -d '' -r dir 
 do
-         echo "Processing File $f"
-         dcmodify -imt -nb -e "6000,3000" $f
-         dcmodify -imt -nb -e "6000,0010" $f
-         dcmodify -imt -nb -e "6000,0011" $f
-         dcmodify -imt -nb -e "6000,0022" $f
-         dcmodify -imt -nb -e "6000,0040" $f
-         dcmodify -imt -nb -e "6000,0050" $f
-         dcmodify -imt -nb -e "6000,0100" $f
-         dcmodify -imt -nb -e "6000,0102" $f
- done
+         echo "Processing File $dir"
+         dcmodify -imt -nb -e "6000,3000" "$dir"
+         dcmodify -imt -nb -e "6000,0010" "$dir"
+         dcmodify -imt -nb -e "6000,0011" "$dir"
+         dcmodify -imt -nb -e "6000,0022" "$dir"
+         dcmodify -imt -nb -e "6000,0040" "$dir"
+         dcmodify -imt -nb -e "6000,0050" "$dir"
+         dcmodify -imt -nb -e "6000,0100" "$dir"
+         dcmodify -imt -nb -e "6000,0102" "$dir"
+done
