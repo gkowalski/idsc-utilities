@@ -6,21 +6,28 @@
 # Prerequisites : Need to have the dcmtk executables installed on your system.
 # See the README.md for details on how to install them.
 
-if  [ $# != 1 ];
+if  [ $# -lt 1 ];
 then
-  echo "Usage removeOverlay.sh  [directory to process]"
+  echo "Usage removeOverlay.sh  [directory1] [directory2] , etc... "
   exit 1
 fi
 
-find $1 -name \*.dcm -type f  -print0  | while read -d '' -r dir 
+for var in "$@"
 do
-         echo "Processing File $dir"
-         dcmodify -imt -nb -e "6000,3000" "$dir"
-         dcmodify -imt -nb -e "6000,0010" "$dir"
-         dcmodify -imt -nb -e "6000,0011" "$dir"
-         dcmodify -imt -nb -e "6000,0022" "$dir"
-         dcmodify -imt -nb -e "6000,0040" "$dir"
-         dcmodify -imt -nb -e "6000,0050" "$dir"
-         dcmodify -imt -nb -e "6000,0100" "$dir"
-         dcmodify -imt -nb -e "6000,0102" "$dir"
+    echo "Processing dir : $var"
+	find $var -name \*.dcm -type f  -print0  | while read -d '' -r dir 
+	do
+		 echo "Processing File $dir"
+		 dcmodify -imt -nb -e "6000,3000" "$dir"
+		 dcmodify -imt -nb -e "6000,0010" "$dir"
+		 dcmodify -imt -nb -e "6000,0011" "$dir"
+		 dcmodify -imt -nb -e "6000,0022" "$dir"
+		 dcmodify -imt -nb -e "6000,0040" "$dir"
+		 dcmodify -imt -nb -e "6000,0050" "$dir"
+		 dcmodify -imt -nb -e "6000,0100" "$dir"
+		 dcmodify -imt -nb -e "6000,0102" "$dir"
+		 #
+		 dcmodify -imt -nb -e "0029,E131" -e "0009,1040" "$dir"
+
+	done
 done
